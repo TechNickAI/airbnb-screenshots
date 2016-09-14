@@ -1,0 +1,60 @@
+#!/usr/bin/env node
+var fs = require('fs');
+    child_process = require('child_process'),
+    lineReader = require('line-reader');
+
+var usage = "Usage $0 <inputfile> <outputdir>",
+    argv = require('yargs')
+    .usage(usage)
+    .help("h")
+    .alias("h", "help")
+    .demand(2, "You must supply and input file and and output directory")
+    .describe("c", "cookie file (output from Cookie Inspector export)")
+    .alias("c", "cookie-file")
+    .boolean('v')
+    .describe("v", "More output")
+    .alias("v", "verbose")
+    .argv;
+
+var inputFile = argv._[0];
+if (! fs.existsSync(inputFile)) {
+    console.log("Input file '" + inputFile + "' does not exist");
+    process.exit()
+}
+
+
+var outputDir = argv._[1];
+if (! fs.existsSync(outputDir)) {
+    console.log("Output directory does not exist");
+    process.exit()
+}
+
+function parseCookieFile(file) {
+}
+
+function capturePage(url, file) {
+    console.log("Downloading " + url);
+
+    var out = child_process.execSync("webshot --shot-size=page/page " + url + " " + file).toString()
+    if (argv.v) {
+        console.log(out)
+    }
+
+    console.log("Screenshot saved to " + file);
+}
+
+var line = 0;
+lineReader.eachLine(inputFile, function(line, last) {
+    line++;
+    if (line > 1) { // Skip the first line, because it is the CSV header
+
+        console.log("Grabbing reservation ", line);
+        var outputFile = outputDir + '/' + line + '.png';
+        capturePage("https://lux.airbnb.com/reservations/" + line, outputFile);
+        if(last){
+            // or check if it's the last one
+            console.log("Done");
+            process.exit()
+        }
+    }
+});

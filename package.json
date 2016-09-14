@@ -1,0 +1,12 @@
+{
+  "name": "airbnb-screenshots",
+  "description": "Simple tool for getting screenshots from Airbnb",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "webshot-cli": "*",
+    "yargs": "*",
+    "line-reader": "*"
+  }
+}
+

@@ -20,17 +20,18 @@ There are a few dependencies to set up. This is a one time set up for each compu
 Once you have it installed, you run it by passing the input file and output directory. The input file is a CSV file with reservation ids, one per line. The output directory is where you want the files saved. 
 
 
-#### Chrome Extension for getting Airbnb 
+#### Chrome Extension for getting Airbnb cookies
  
-The tricky part to getting this to work was passing the login cookies to the browser that is doing the screenshots. The solution (if you can call it that) that I used was to use a Chrome Extension called [Cookie Inspector](https://chrome.google.com/webstore/detail/cookie-inspector/jgbbilmfbammlbbhmmgaagdkbkepnijn?hl=en). It has an export that will give you all the cookies for a given website. 
+The tricky part to getting this to work was passing the login cookies to the browser that is doing the screenshots. The solution (if you can call it that) that I used was to use a Chrome Extension called [Edit This Cookie](https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg?hl=en). It has an export that will give you all the cookies for a given website.
 
 To get your Airbnb cookies:
 
-1. Install Cookie Inspector chrome extension
-2. Visit airbnb.com. Log in. 
-3. Open the developer console (View -> Developer Tools -> Javascript Console)
-4. Click on Cookies
+1. Install the chrome extension
+2. Visit airbnb.com. Log in.
+3. Click on the Cookie in the toolbar. Click "Export". This will copy the cookies to a clipboard. Save this to a text file (using Notepad). I usally call it `cookies.json`.
 
 #### Running
-1. Create the CSV file with the reservervation ids. 1 column. For a sample format, see [media/sample.csv](media/sample.csv)
-2. From terminal, cd into the directory where you cloned the repository (`cd airbnb-screenshots`) and run `./grab --cookie-jar=$cookieFile $inputfile $outputDir`, where $cookieFile is the file you exported from the Cookie Inspector, $inputFile is the CSV you created, and $outputDir is the directory where you want to have the files saved. 
+1. Create the CSV file with the reservervation ids. 1 column. For a sample format, see [media/sample_reservations.csv](media/sample_reservations.csv)
+2. From terminal, cd into the directory where you cloned the repository (`cd airbnb-screenshots`) and run `./grab --cookie-jar=$cookieFile $inputfile $outputDir`, where $cookieFile is the file you created from Cookie Jar. $inputFile is the CSV you created, and $outputDir is the directory where you want to have the files saved.
+
+This will open the CSV file and grab the url for each reservation, saving it as $resid.png in the output directory.

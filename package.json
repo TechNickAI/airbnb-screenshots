@@ -4,9 +4,9 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "webshot-cli": "*",
+    "webshot": "*",
     "yargs": "*",
-    "line-reader": "*"
+    "async": "~2"
   }
 }
 

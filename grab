@@ -13,6 +13,9 @@ var usage = "Usage $0 <inputfile> <outputdir>",
     .demand(2, "You must supply and input file and and output directory")
     .describe("c", "cookie file (output from Cookie Inspector export)")
     .alias("c", "cookie-jar")
+    .describe("b", "base url to start with, resid will be appended to the end")
+    .alias("b", "base-url")
+    .default("b", "https://admin.airbnb.com/admin/trips/reservation?id=")
     .boolean('v')
     .describe("v", "More output")
     .alias("v", "verbose")
@@ -46,7 +49,7 @@ async.eachSeries(resids, function (resid, callback) {
     resid = resid.trim()
     console.log("Grabbing reservation '" + resid + "'");
     var outputFile = outputDir + '/' + resid + '.png',
-        url = "https://admin.airbnb.com/admin/trips/reservation?id=" + resid,
+        url = argv.b + resid,
         options = {
             "shotSize": "all",
             "cookies": cookies,

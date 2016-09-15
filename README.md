@@ -12,7 +12,7 @@ There are a few dependencies to set up. This is a one time set up for each compu
 
 ### Installing airbnb-screenshots
 1. Clone this repository by running `git clone https://github.com/gorillamania/airbnb-screenshots.git` Note: if you haven't installed `git` yet, you will be prompted with instructions on how to do so
-2. Run `npm install` to install the required packages
+2. Run `cd airbnb-screenshots; npm install` to install the required packages
 
 
 
@@ -32,6 +32,6 @@ To get your Airbnb cookies:
 
 #### Running
 1. Create the CSV file with the reservervation ids. 1 column. For a sample format, see [media/sample_reservations.csv](media/sample_reservations.csv)
-2. From terminal, cd into the directory where you cloned the repository (`cd airbnb-screenshots`) and run `./grab --cookie-jar=$cookieFile $inputfile $outputDir`, where $cookieFile is the file you created from Cookie Jar. $inputFile is the CSV you created, and $outputDir is the directory where you want to have the files saved.
+2. From terminal, cd into the directory where you cloned the repository (if you haven't already) (`cd airbnb-screenshots`) and run `./grab --cookie-jar=$cookieFile $inputfile $outputDir`, where $cookieFile is the file you created from Cookie Jar. $inputFile is the CSV you created, and $outputDir is the directory where you want to have the files saved.
 
 This will open the CSV file and grab the url for each reservation, saving it as $resid.png in the output directory.
